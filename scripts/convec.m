@@ -1,5 +1,9 @@
 function [ C , C_BC_arriba] = convec( Vol, Areas,...
+<<<<<<< Updated upstream
     Normales, N, Vecinos,  BCtop, v, cv, rho)
+=======
+    Normalesx,Normalesy, N, Vecinos,  BCtop, v, cv, rho)
+>>>>>>> Stashed changes
 
 % Esta función entrega la matriz de convección del dominio, así como la 
 % parte convectiva relativa a las condiciones de contorno.
@@ -31,7 +35,11 @@ function [ C , C_BC_arriba] = convec( Vol, Areas,...
 %           condiciones de contorno en el límite superior.
 
  Vecinos=;
+<<<<<<< Updated upstream
  Normales=; 
+=======
+  
+>>>>>>> Stashed changes
  %%Preguntar como está montado la matriz conectividad para ajustar a
  %%vecinos
  C = zeros(N, N);
@@ -41,7 +49,11 @@ function [ C , C_BC_arriba] = convec( Vol, Areas,...
          if Vecinos(i,j)>0
              k = Vecinos(i,j); %índice de la celda vecina a la celda i en la cara j
      
+<<<<<<< Updated upstream
              n = Normales(i,j); %Normal a la cara j de la celda i
+=======
+             n = [Normalesx(i,j),Normalesy(i,j)]; %Normal a la cara j de la celda i
+>>>>>>> Stashed changes
              vn = dot(v(i,:),n);
              
              if vn < 0 %celda vecina aguas arriba
