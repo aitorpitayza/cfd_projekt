@@ -1,5 +1,4 @@
 function [grid_preproc] = mesher(grid_data)
-tic
 
 %This script generates a mesh from data imported by grid_loader.m.
 
@@ -65,9 +64,9 @@ for i=1:length(grid_data.cells(:,1))
     
 
     % Mesh visualization
-    c = [1; 0.5; 0; 0.75]; %Colour of the fill, not relevant.
-    fill(elemX,elemY,c);
-    hold on;
+    % c = [1; 0.5; 0; 0.75]; %Colour of the fill, not relevant.
+    % fill(elemX,elemY,c);
+    % hold on;
 
     
     grid_preproc.EX(i,1:3)=elemX(1:3);
@@ -201,5 +200,5 @@ end
         
 
     end
-toc
+
 end
