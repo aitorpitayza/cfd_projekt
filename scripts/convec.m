@@ -47,7 +47,8 @@ function [ C , C_BC_arriba] = convec( Vol, Areas,...
                 
              n = [Normalesx(i,j),Normalesy(i,j)]; %Normal a la cara j de la celda i       
 
-             vn = dot(v(i,:),n);
+             vn =  producto_escalar(v,n);
+            
              
              if vn < 0 %celda vecina aguas arriba
              A = Areas(i,j);    
