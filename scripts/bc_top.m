@@ -47,7 +47,27 @@ function [BCtop] = bc_top(nodes, cells)
 
     end
 
-    BCtop = higher_nodes;
+    higher_cells = [];
+
+    for ii=1:length(higher_nodes)
+
+        for jj=1:length(cells(1,:))
+
+            for kk=1:length(cells(:,1))
+
+                if higher_nodes(ii) == cells(kk,jj)
+
+                    higher_cells = [higher_cells, kk];
+
+                end
+
+            end
+
+        end
+
+    end
+
+    BCtop = unique(higher_cells);
     
 
 end
