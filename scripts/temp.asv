@@ -17,13 +17,15 @@ function [dT_dt] = temp(T, t, grid_preproc, v,cv, rho)
 % ------------- Términos convectivos -------------
 
 N = grid_preproc.N; % Numero de celdas.
-Vol = grid_preproc.volumes; % Matriz que almacena el volumen de cada celda.
-Areas = grid_preproc.areas; % Matriz que almacena el area de cada celda.
-Normalesy = grid_preproc.ny ; % Matriz y componente del vector normal.
-Vecinos = grid_preproc.connectivity; % Matriz que contiene las celdas ...
-BCtop = grid_preproc.BCtop ; % Vector que almacena las celdas superiores del dominio.
-Rc = grid_preproc.centroid; %Matriz Nx2 con las coordenadas de los centroides.
-% Falta la funcion de la velocidad v = speed(t) (Nx2 matrix)
+grid_preproc.volumes = Vol=grid_preproc.volumes; % Matriz que almacena el volumen de cada celda.
+grid_preproc.areas = Areas; % Matriz que almacena el area de cada celda.
+grid_preproc.nx = Normalesx; % Matriz X componente del vector normal.
+grid_preproc.ny = Normalesy; % Matriz y componente del vector normal.
+grid_preproc.connectivity = Vecinos; % Matriz que contiene las celdas ...
+% vecinas de cada elemento de la malla.
+grid.BCtop = BCtop; % Vector que almacena las celdas superiores del dominio.
+
+% Falta la funcion de la velocidad v = speed(t) (2xN matrix)
 
 [ C , C_BC_arriba] = convec( Vol, Areas,... 
     Normalesx,Normalesy, N, Vecinos,  BCtop, v, cv, rho)
