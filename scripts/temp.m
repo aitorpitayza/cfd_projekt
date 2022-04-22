@@ -1,4 +1,4 @@
-function [dT_dt] = temp(T, t, grid_preproc, cv, rho)
+function [dT_dt] = temp(T, t, grid_preproc, v,cv, rho)
 
 % Esta función representa la EDO ya discretizada con las matrices de los 
 % términos ya calculadas.
@@ -23,8 +23,9 @@ grid_preproc.nx = Normalesx; % Matriz X componente del vector normal.
 grid_preproc.ny = Normalesy; % Matriz y componente del vector normal.
 grid_preproc.connectivity = Vecinos; % Matriz que contiene las celdas ...
 % vecinas de cada elemento de la malla.
+grid.BCtop = BCtop; % Vector que almacena las celdas superiores del dominio.
 
-% Falta script para BCtop;
+% Falta la funcion de la velocidad v = speed(t) (2xN matrix)
 
 [ C , C_BC_arriba] = convec( Vol, Areas,... 
     Normalesx,Normalesy, N, Vecinos,  BCtop, v, cv, rho)
