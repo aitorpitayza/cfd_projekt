@@ -72,9 +72,9 @@ for i = 1:length( BCtop )
     k = BCtop( i );
     
     for j = 1:3
-        if Normales(k,3*j-2)==0
+        if Normalesx(k,j)==0
             
-            C_BC_arriba( k,k ) = - Areas( k, 2*j-1 ) * v(k,2)/ Vol(k);
+            C_BC_arriba( k,k ) = - Areas( k, j ) * v(k,2)/ Vol(k);
             
         end
     end
