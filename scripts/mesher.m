@@ -7,6 +7,8 @@ tic
 
 %OUTPUT:
 
+    % grid_preproc.nodes : nodes matrix. See grid_loader
+    % grid_preproc.cells : cells matrix. See grid_loader
     % grid_preproc.N: cell quantity
     % grid_preproc.M: node quantity
     % grid_preproc.EX: X coord. of each node. (cell?)
@@ -33,6 +35,11 @@ tic
       % neighbouring cell of the area 4-56, and (j,3) to 56-2.
     
 % Calculations:
+
+% Data : 
+
+grid_preproc.cells = grid_data.cells;
+grid_preproc.nodes = grid_data.nodes;
 
 grid_preproc.N = length(grid_data.cells); % Cell qty.
 grid_preproc.M = length(grid_data.nodes); % Node qty.
