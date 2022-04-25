@@ -1,10 +1,10 @@
-function [BCtop] = bc_top(nodes, cells)
+function [cells_top] = cells_top(nodes, cells)
 
     % Esta funcion encuentra y almacena las celdas (su id) que se encuentran en
     % la parte superior del dominio. Para ello, primero busca los nodos que 
     % estan más arriba (en este caso todos estan a la misma altura) y, una vez 
     % encontrados y almacenados, busca las celdas las que los poseen para 
-    % almacenarlas en BCtop (sus ids).
+    % almacenarlas en cells_top (sus ids).
     % 
     % --- Inputs ---
     %
@@ -15,9 +15,9 @@ function [BCtop] = bc_top(nodes, cells)
     %
     % --- Outputs ---
     %
-    %       BCtop : vector que almacena los ids de las celdas que están en el   
+    %       cells_top : vector que almacena los ids de las celdas que están en el   
     %               contorno superior del domino ('y' máxima).
-    %               BCtop = [cellk_id, cellk+1_id, ...]
+    %               cells_top = [cellk_id, cellk+1_id, ...]
 
     y_max = 0;
     higher_nodes = [];
@@ -67,7 +67,7 @@ function [BCtop] = bc_top(nodes, cells)
 
     end
 
-    BCtop = unique(higher_cells);
+    cells_top = unique(higher_cells);
     
 
 end
