@@ -35,8 +35,8 @@ K = zeros(N,N);
 
 % Porque j antes que i ??
 
- for j = 1:3
-    for i = 1:N
+for i = 1:N
+    for j = 1:3
         if Vecinos(i,j)>0
         k = Vecinos(i,j);   
         % Normal exterior para la cara j de la celda i
