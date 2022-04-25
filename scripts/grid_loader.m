@@ -1,10 +1,12 @@
-function [grid_data] = grid_loader(filenames)
+function [grid_data, bc] = grid_loader(filenames)
     % load_grid : Creates a variable with all the grid data based on the 
     % inserted files.
     %  
     % --- Inputs ---
     %    filenames : 2x1 text array with the names of the files.
-    %                filenames = [ "node_file.dat" "cell_file.dat"]
+    %                filenames = [ "node_file.dat" "cell_file.dat" 
+    %                              "bc_bottom.dat" "bc_top.dat"    
+    %                              "bc_left.dat" "bc_right.dat"]
     %
     % --- Outputs ---
     %     grid_data : struct variable which contains the grid data.
@@ -29,5 +31,13 @@ function [grid_data] = grid_loader(filenames)
 
     cell_data = readtable(filenames(2),'VariableNamingRule','preserve');
     grid_data.cells(:,:) = table2array(cell_data);
+
+    bc.bottom(:,:) = importdata(filenames(3));
+
+    bc.top(:,:) = importdata(filenames(4));
+
+    bc.left(:,:) = importdata(filenames(5));
+
+    bc.right(:,:) = importdata(filenames(6));
 
     end
