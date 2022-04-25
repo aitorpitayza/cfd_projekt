@@ -1,8 +1,12 @@
-function [grid_preproc] = mesher(grid_data)
+function [grid_preproc] = mesher(grid_data, bc_nodes)
 
 %This script generates a mesh from data imported by grid_loader.m.
 
-% INPUT: grid_data from grid_loader.m (cells and nodes).
+% INPUT: 
+%   grid_data from grid_loader.m (cells and nodes).
+%   bc_nodes : var struct que contiene los nodos de cada una de las CC.
+%              Siendo estas: bottom, -3, top, -4, left,-1 y right, -2.
+
 
 %OUTPUT:
 
