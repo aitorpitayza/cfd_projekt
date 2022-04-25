@@ -203,7 +203,7 @@ end
 
     end
 
-    grid.BCtop = cells_top(grid.nodes, grid.cells);
-    grid.BCbot = cells_bottom(grid.nodes, grid.cells);
+    grid_preproc.BCtop = cells_top(grid_preproc.nodes, grid_preproc.cells);
+    grid_preproc.BCbot = cells_bottom(grid_preproc.nodes, grid_preproc.cells);
 
 end

@@ -25,9 +25,8 @@ function [ C , C_BC_arriba] = convec( Vol, Areas,...
 %   - v: matriz de dimensión N filas y dos columnas que contiene las 
 %        componentes de la velocidad en m/s en los centroides de cada celda 
 %        de la malla.
- %  -BCtop:vector que contiene las celdas situadas en el límite
+%   - BCtop:vector que contiene las celdas situadas en el límite
 %            superior del dominio.
-
 %
 %   Salida
 %   ......
