@@ -33,6 +33,8 @@ function [ K, K_BC ] = conduc( Vol, Areas, Rc, Rn, Normalesx,Normalesy,...
 K = zeros(N,N);
 
 
+% Porque j antes que i ??
+
  for j = 1:3
     for i = 1:N
         if Vecinos(i,j)>0

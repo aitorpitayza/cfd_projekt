@@ -35,6 +35,8 @@ function [ K_bc ] = cdc_dirichlet_conduc(T_cc_D_cond_left,...
 
 K_bc = zeros( 1, N );
 
+% porque k es un vector y le preguntas si es un escalar????? lin 43
+
 for i = 1:N
     for j = 1:3
         k = [Normalesx(i,j),Normalesy(i,j)];
