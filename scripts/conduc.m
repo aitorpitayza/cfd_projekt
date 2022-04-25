@@ -58,16 +58,19 @@ end
 
 K = K*kk;
 K = sparse(K);
+
+% En el caso de temperatura constante.
+
 K_BC = zeros(N,N);
- for j = 1:3
-   for i = 1:N
+for i = 1:N
+    for j = 1:3
   
         k = Vecinos(i,j);
         if k == -1 % Izquierda
         % Normal exterior para la cara j de la celda i   
         n = [Normalesx(i,j),Normalesy(i,j)]; %Normal a la cara j de la celda i 
         ri = [Rc(i,1) Rc(i,2)];
-        rj = [0 Rc(i,2)];
+        rj = [min(Rn(:,1)) Rc(i,2)];
         vect = ri - rj;
         dist = norm(vect);
         dn = producto_escalar(vect,n);
