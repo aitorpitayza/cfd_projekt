@@ -165,25 +165,25 @@ for i=1:Num_contador
 %Matriz del sistema en el instante temporal actual. 
 Matriz_Principal = sparse(C+C_BC_arriba+K+K_BC);
 %Matriz del sistema en el siguiente instante temporal.
-Matriz_Principal_n1 =sparse(C_siguiente+C_BC_arriba_siguiente+K_siguiente+K_BC_siguiente);
+Matriz_Principal_siguiente =sparse(C_siguiente+C_BC_arriba_siguiente+K_siguiente+K_BC_siguiente);
 %Vector de términos independientes del sistema en el instante
 %temporal actual.     
 Vect_indep = C_bc + K_bc;
 %Vector de términos independientes del sistema en el siguiente instante
 %temporal.     
-Vect_indep_n1= C_bc_siguiente+K_bc_siguiente;
+Vect_indep_siguiente= C_bc_siguiente+K_bc_siguiente;
  
 
 if integrador == 1
 
-    [Matriz_Temp(:,i+1)]= euler_implicito( Matriz_Principal_n1, Vect_indep, dT, Tempi,N);
+    [Matriz_Temp(:,i+1)]= euler_implicito( Matriz_Principal_siguiente, Vect_indep, dT, Tempi,N);
 
     
 elseif integrador == 2
    
 
-    Matriz_Temp(:,i+1)= crank_nicolson( Matriz_Principal, Matriz_Principal_n1, Vect_indep,...
-      Vect_indep_n1, dT, Tempi,N);
+    Matriz_Temp(:,i+1)= crank_nicolson( Matriz_Principal, Matriz_Principal_siguiente, Vect_indep,...
+      Vect_indep_siguiente, dT, Tempi,N);
         
     
 end
