@@ -32,7 +32,7 @@ tic
     % Campos de velocidad y temperatura iniciales
         
         % Campo de velocidad inicial
-        campo_velocidad = @(x,y) [0,(0.005+(0.05-x)*2)*0.02];
+        campo_velocidad = @(x,y,t) [0;(0.005+(0.05-x)*2)*0.02];
         
         % Distribución de temperatura inicial
         T_ci = @(x,y) (y)*4000;
@@ -98,8 +98,14 @@ tic
 
     % Problem : Definición física del problema
 
-        problem=@(w,t) temp(w, t, grid, campo_velocidad, datos, ...
-                            Tipo_CC, cc_inlet, cc_left, cc_right)
+        problem=@(w,t) temp(w, t, grid, @campo_velocidad, datos, ...
+                            Tipo_CC, @cc_inlet, @cc_left, @cc_right)
+
+    % Inicialización : T_0
+
+        T_0 = ones(grid.N, 1);
+
+    temp(T_0, 0 , grid, campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
 
 
 

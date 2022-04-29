@@ -1,4 +1,4 @@
-function [ K, K_BC ] = conduc(grid, kk, Tipo_CC)
+function [ K, K_BC ] = conduc(grid, Tipo_CC)
     % conduc( Vol, Areas, Rc, Rn, Normalesx,Normalesy,...
     % N, Vecinos, kk )
 
@@ -33,9 +33,6 @@ function [ K, K_BC ] = conduc(grid, kk, Tipo_CC)
 %   - K_BC: matriz que contiene la parte conductiva asociada a las
 %           condiciones de contorno.
 
-K = zeros(N,N);
-K_BC = zeros(N,N);
-
 N = grid.N;
 Vol = grid.volumes;
 Areas = grid.areas;
@@ -45,6 +42,9 @@ Rc = grid.centroid;
 Rn = grid.nodes;
 Vecinos = grid.connectivity;
 
+K = zeros(N,N);
+K_BC = zeros(N,N);
+
 for i = 1:N
     for j = 1:3
 
@@ -53,9 +53,9 @@ for i = 1:N
         if ( k > 0 )
  
             % Normal exterior para la cara j de la celda i
-            n = [Normalesx(i,j),Normalesy(i,j)]; %Normal a la cara j de la celda i       
-            ri = [Rc(i,1) Rc(i,2)];
-            rj = [Rc(k,1) Rc(k,2)];
+            n = [Normalesx(i,j);Normalesy(i,j)]; %Normal a la cara j de la celda i       
+            ri = [Rc(i,1); Rc(i,2)];
+            rj = [Rc(k,1); Rc(k,2)];
             vect = ri - rj;
             dist = norm(vect);   
             dn = producto_escalar(vect,n);
@@ -69,9 +69,9 @@ for i = 1:N
             if (Tipo_CC(1) == 1) % Dirichlet
 
                 % Normal exterior para la cara j de la celda i   
-                n = [Normalesx(i,j),Normalesy(i,j)]; 
-                ri = [Rc(i,1) Rc(i,2)];
-                rj = [min(Rn(:,1)) Rc(i,2)];
+                n = [Normalesx(i,j);Normalesy(i,j)]; 
+                ri = [Rc(i,1); Rc(i,2)];
+                rj = [min(Rn(:,1)); Rc(i,2)];
                 vect = ri - rj;
                 dist = norm(vect);
                 dn = producto_escalar(vect,n);
@@ -89,10 +89,10 @@ for i = 1:N
             if (Tipo_CC(1) == 1) % Dirichlet
 
                 % Normal exterior para la cara j de la celda i
-                n = [Normalesx(i,j),Normalesy(i,j)];
+                n = [Normalesx(i,j);Normalesy(i,j)];
                 
-                ri = [Rc(i,1) Rc(i,2)];
-                rj = [max(Rn(:,1)) Rc(i,2)];
+                ri = [Rc(i,1); Rc(i,2)];
+                rj = [max(Rn(:,1)); Rc(i,2)];
                 vect = ri - rj;
                 dist = norm(vect);
                 dn = producto_escalar(vect,n);

@@ -1,4 +1,4 @@
-function [dT_dt] = temp(T, t, grid_preproc, v,cv, rho)
+function [dT_dt] = temp(T, t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
 
 % Esta función representa la EDO ya discretizada con las matrices de los 
 % términos ya calculadas.
@@ -7,8 +7,18 @@ function [dT_dt] = temp(T, t, grid_preproc, v,cv, rho)
 %   
 %       T : Vector temperaturas en los centroides de las celdas.
 %       t : instante de tiempo (s)
-%       grid_preproc : variable struct con la información de la malla necesaria.
-%
+%       grid : variable struct con la información de la malla necesaria.
+%       v : función velocidad en función de (x,y) y del tiempo. v = f(x,y,t).
+%       datos : cv, cp, rho y kk.
+%       Tipo_CC : Vector que almacena el tipo de CC a izqda Tipo_CC(1) y  a 
+%                 derecha Tipo_CC(2). 1 : Dirichlet, 2 : Neumann
+%       cc_inlet : función de la posición "x" y del tiempo que determina la 
+%                  temperatura a la entrada del dominio.
+%       cc_left : función de la posición "y" y del tiempo que determina la cc en
+%                 el lado izquierdo del dominio.
+%       cc_right : función de la posición "y" y del tiempo que determina la ccen
+%                 el lado derecho del dominio.
+%       
 % --- Outputs ---
 %
 %       dT_dt : Vector derivada temporal de la temperatura en cada celda.
@@ -16,14 +26,25 @@ function [dT_dt] = temp(T, t, grid_preproc, v,cv, rho)
 
 % ------------- Términos convectivos -------------
 
-N = grid_preproc.N; % Numero de celdas.
-Vol = grid_preproc.volumes; % Matriz que almacena el volumen de cada celda.
-Areas = grid_preproc.areas; % Matriz que almacena el area de cada celda.
-Normalesy = grid_preproc.ny ; % Matriz y componente del vector normal.
-Vecinos = grid_preproc.connectivity; % Matriz que contiene las celdas ...
-BCtop = grid_preproc.BCtop ; % Vector que almacena las celdas superiores del dominio.
-Rc = grid_preproc.centroid; %Matriz Nx2 con las coordenadas de los centroides.
-% Falta la funcion de la velocidad v = speed(t) (Nx2 matrix)
+% Matrices
+[C, C_BC] = convec( grid, @(x,y,t) v, t);
 
-[ C , C_BC_arriba] = convec( Vol, Areas,... 
-    Normalesx,Normalesy, N, Vecinos,  BCtop, v, cv, rho)
+% Término independiente
+c_bc = cc_convec( @(x,t) cc_inlet, grid, @(x,y,t) v, t);
+
+% ------------- Términos conductivos -------------
+
+% Conductividad térmica :
+kk = datos.kk;
+rho = datos.rho;
+cv = datos.cv;
+
+% Matrices
+[K, K_BC ] = conduc(grid, Tipo_CC);
+
+% Término independiente
+k_bc = cc_conduc( @(y,t) cc_left, @(y,t) cc_right, grid, t, Tipo_CC)
+
+% Suma de todos los términos
+dT_dt = K * kk / (rho *  cv) * T + K_BC * kk / (rho *  cv) * T + k_bc + ...
+        C * T + C_BC * T + c_bc;

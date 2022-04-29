@@ -1,5 +1,4 @@
-function [ C , C_BC_arriba] = convec( Vol, Areas,... 
-    Normalesx,Normalesy, N, Vecinos,  BCtop, v, cv, rho)
+function [ C , C_BC] = convec( grid, v, t)
 
 
 % Esta función entrega la matriz de convección del dominio, así como la 
@@ -10,77 +9,82 @@ function [ C , C_BC_arriba] = convec( Vol, Areas,...
 %   Entradas
 %   ........
 %
-%   - N: número de celdas.
-%   - Vol: vector que contiene las áreas de las celdas de la malla 
-%   - Area: matriz que contiene la longitud de cada lado de las celdas.
-%   - Normalesx:matriz que contiene la componente x de los vectores normales de cada lado de
-%               las celdas. Normalesx(i,j): componente x del vec. normal a
-%               la cara j de la celda i.
-%  - Normalesy: matriz que contiene la componente y de los vectores normales de cada lado de
-%               las celdas. % 
-%   - Vecinos: matriz que contiene las celdas vecinas de cada elemento de 
-%              la malla. Vecinos(i,j):índice de la celda vecina a la celda i en la cara j
-%   - rho: densidad del fluido [kg/m^3].
-%   - cv: calor específico a volumen constante [J/kgK].
-%   - v: matriz de dimensión N filas y dos columnas que contiene las 
-%        componentes de la velocidad en m/s en los centroides de cada celda 
-%        de la malla.
-%   - BCtop:vector que contiene las celdas situadas en el límite
-%            superior del dominio.
+%   - grid : variable struct que contiene los siguientes datos
+%
+%   -> N: número de celdas.
+%   -> Vol: vector que contiene las áreas de las celdas de la malla 
+%   -> Area: matriz que contiene la longitud de cada lado de las celdas.
+%   -> Normalesx: matriz que contiene la componente x de los vectores normales 
+%                 de cada lado de las celdas. Normalesx(i,j): componente x del 
+%                 vec. normal a la cara j de la celda i.
+%   -> Normalesy: matriz que contiene la componente y de los vectores normales 
+%                 de cada lado de las celdas. 
+%   -> Rc: matriz que contiene las coordenadas del centroide de cada celda.
+%   -> Rn: matriz que contiene las coordenadas de los nodos de la malla.
+%   -> Vecinos: matriz que contiene las celdas vecinas de cada elemento de 
+%              la malla.
+%
+%   - v : función velocidad en el dominio. v = f(x,y,t).
+%   - t : tiempo (s)
 %
 %   Salida
 %   ......
 %
 %   - C: matriz de convección del problema.
-%   - C_BC_arriba: matriz que contiene la parte convectiva asociada a las
-%           condiciones de contorno en el límite superior.
+%   - C_BC: matriz que contiene la parte convectiva asociada a las
+%           condiciones de contorno.
 
+N = grid.N;
+Vol = grid.volumes;
+Areas = grid.areas;
+Normalesx = grid.nx;
+Normalesy = grid.ny;
+Rc = grid.centroid;
+Rn = grid.nodes;
+Vecinos = grid.connectivity;
 
- C = zeros(N, N);
+C = zeros(N, N);
+C_BC = zeros(N, N);
+
  for i = 1:N
+
+    velocidad = v(Rc(i,1), Rc(i,2), t);
+
      for j = 1:3
+
+        k = Vecinos(i,j);
          
-         if Vecinos(i,j)>0
+        if (k > 0)
              
-             k = Vecinos(i,j); %índice de la celda vecina a la celda i en la cara j
+            %índice de la celda vecina a la celda i en la cara j
                 
-             n = [Normalesx(i,j),Normalesy(i,j)]; %Normal a la cara j de la celda i       
+            n = [Normalesx(i,j);Normalesy(i,j)]; %Normal a la cara j de la celda i       
 
-             vn =  producto_escalar(v,n);
+            vn =  velocidad * n;
             
-             
-             if vn < 0 %celda vecina aguas arriba
-             A = Areas(i,j);    
-             conv =  -A*vn*rho*cv ;
+            if vn < 0 %celda vecina aguas arriba
 
- 
-                     C(i,k) = conv / Vol(i) ; %Flujo de energía entrando en la celda i
-                     C(k,k) = C(k,k) - conv / Vol(k); %Flujo saliendo de la celda k
+                A = Areas(i,j);    
+                conv =  -A*vn ;
+
+                C(i,k) = conv / Vol(i) ; %Flujo de energía entrando en la celda i
+                C(k,k) = C(k,k) - conv / Vol(k); %Flujo saliendo de la celda k
                      
             end
-         end
-     end
- end
+
+        elseif (k == -4) % Top CC
+
+            C_BC( i,i ) = - Areas( i, j ) * norm(v(Rc(i,1), Rc(i,2), t))/ Vol(i);
+
+        end
+
+    end
+
+end
 
 C = sparse(C);
 
-% Concicion de contorno de flujo saliente (arriba)
-C_BC_arriba = zeros( N, N );
-
-for i = 1:length( BCtop )
-    k = BCtop( i );
-    
-    for j = 1:3
-        if Normalesx(k,j)==0
-            
-            C_BC_arriba( k,k ) = - Areas( k, j ) * v(k,2)/ Vol(k);
-            
-        end
-    end
-end
-
-C_BC_arriba = sparse(C_BC_arriba);
-
+C_BC = sparse(C_BC);
 
 end
 

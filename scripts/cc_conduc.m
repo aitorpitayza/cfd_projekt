@@ -33,8 +33,6 @@ function [ K_bc ] = cc_conduc( cc_left, cc_right, grid, t , Tipo_CC)
 %   - K_bc: parte conductiva de los términos independientes asociada al 
 %           instante temporal.
 
-K_bc = zeros( 1, N );
-
 N = grid.N;
 Vol = grid.volumes;
 Areas = grid.areas;
@@ -43,8 +41,11 @@ Normalesy = grid.ny;
 Rc = grid.centroid;
 Vecinos = grid.connectivity;
 
+K_bc = zeros( N, 1);
+
 
 % Las funciones habrán de ser consecuentemente elegidas en el main.
+
 Grad_cc_N_izq = @cc_left;
 Grad_cc_N_dcha = @cc_right;
 T_cc_D_cond_left = @cc_left;
@@ -59,17 +60,17 @@ for i = 1:N
 
             if (Tipo_CC(1) == 1) % Dirichlet
 
-                n = [Normalesx(i,j),Normalesy(i,j)]; 
+                n = [Normalesx(i,j);Normalesy(i,j)]; 
         
-                ri = [Rc(i,1) Rc(i,2)];
-                rj = [0 Rc(i,2)];
+                ri = [Rc(i,1);Rc(i,2)];
+                rj = [0;Rc(i,2)];
                 vect = ri - rj;
                 dist = norm(vect);
                 
                 dn = producto_escalar(vect,n);
             
-                K_bc(i) = -Areas(i,j)*dn/Vol(i)/dist^2*...
-                    T_cc_D_cond_left(Rc(i,2),t);
+                K_bc(i) = -Areas(i,j)*dn/Vol(i)/dist^2 * ...
+                                            T_cc_D_cond_left(Rc(i,2),t);
 
             elseif (Tipo_CC(1) == 2) % Neumann
       
@@ -81,17 +82,17 @@ for i = 1:N
 
             if (Tipo_CC(2) == 1) % Dirichlet
 
-                n= [Normalesx(i,j),Normalesy(i,j)]; 
+                n= [Normalesx(i,j);Normalesy(i,j)]; 
             
-                ri = [Rc(i,1) Rc(i,2)];
-                rj = [max(Rn(:,1)) Rc(i,2)];
+                ri = [Rc(i,1); Rc(i,2)];
+                rj = [max(Rn(:,1)); Rc(i,2)];
                 vect = ri - rj;
                 dist = norm(vect);
                 
                 dn = producto_escalar(vect,n);
                     
-                K_bc(i) = -Areas(i,2*j-1)*dn/Vol(i)/dist^2*...
-                    T_cc_D_cond_right(Rc(i,2),t);
+                K_bc(i) = -Areas(i,2*j-1)*dn/Vol(i)/dist^2 * ...
+                                            T_cc_D_cond_right(Rc(i,2),t);
 
             elseif (Tipo_CC(2) == 2) % Neumann
         
