@@ -210,4 +210,57 @@ end
     grid_preproc.BCtop = cells_top(grid_preproc.nodes, grid_preproc.cells);
     grid_preproc.BCbot = cells_bottom(grid_preproc.nodes, grid_preproc.cells);
 
+    for ii=1:length(grid_preproc.cells(:,1))
+
+        conectividad_celda = grid_preproc.connectivity(ii,:);
+
+        % Vectores que contienen las normales x e y de la celda ii
+        normales_x_celda = grid_preproc.nx(ii,:); 
+        normales_y_celda = grid_preproc.ny(ii,:); 
+
+        % Recorremos esos vectores para encontrar las características de esas  
+        % normales que significan que esa cara esta en una CC.
+        for jj=1:length(normales_x_celda)
+
+            normal_x = normales_x_celda(jj);
+            normal_y = normales_y_celda(jj);
+
+            if conectividad_celda(jj) == 0
+
+                % CC Inferior : Nx = 0, Ny = -1;
+                if (normal_x == 0) & (normal_y == -1)
+
+                    % Bottom CC
+                    grid_preproc.connectivity(ii,jj)
+                    conectividad_celda(jj) = -3;
+
+                elseif (normal_x == 0) & (normal_y == 1)
+
+                    % Top CC
+                    grid_preproc.connectivity(ii,jj)
+                    conectividad_celda(jj) = -4;
+
+                elseif (normal_x == -1) & (normal_y == 0)
+
+                    % Left CC
+                    grid_preproc.connectivity(ii,jj)
+                    conectividad_celda(jj) = -1;
+
+                elseif (normal_x == 1) & (normal_y == 0)
+
+                    % Right CC
+                    grid_preproc.connectivity(ii,jj)
+                    conectividad_celda(jj) = -2;
+
+                end
+
+            end
+
+
+        end
+
+        grid_preproc.connectivity(ii,:) = conectividad_celda;
+
+    end
+
 end
