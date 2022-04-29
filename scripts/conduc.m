@@ -24,7 +24,6 @@ function [ K, K_BC ] = conduc(grid, kk, Tipo_CC)
 %   -> Vecinos: matriz que contiene las celdas vecinas de cada elemento de 
 %              la malla.
 %
-%   - kk: conductividad térmica [W/mK].
 %   - Tipo_CC : vector que contiene información sobre las CC en los laterales.
 %
 %   Salida
@@ -39,7 +38,7 @@ K_BC = zeros(N,N);
 
 N = grid.N;
 Vol = grid.volumes;
-Area = grid.areas;
+Areas = grid.areas;
 Normalesx = grid.nx;
 Normalesy = grid.ny;
 Rc = grid.centroid;
@@ -112,11 +111,8 @@ for i = 1:N
     end
 end
 
-
-K = K*kk;
 K = sparse(K);
 
-K_BC = K_BC*kk;
-K_BC = sparse(K_BC)
+K_BC = sparse(K_BC);
 
 end
