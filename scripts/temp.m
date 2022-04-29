@@ -43,7 +43,7 @@ cv = datos.cv;
 [K, K_BC ] = conduc(grid, Tipo_CC);
 
 % Término independiente
-k_bc = cc_conduc( @(y,t) cc_left, @(y,t) cc_right, grid, t, Tipo_CC)
+k_bc = cc_conduc( @(y,t) cc_left, @(y,t) cc_right, grid, t, Tipo_CC);
 
 % Suma de todos los términos
 dT_dt = K * kk / (rho *  cv) * T + K_BC * kk / (rho *  cv) * T + k_bc + ...

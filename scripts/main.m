@@ -23,7 +23,7 @@ tic
 
     % Propiedades del fluido 
         
-        datos.cp = 1004.5 %[J/(kg*K)] Calor especifico a presión constante
+        datos.cp = 1004.5; %[J/(kg*K)] Calor especifico a presión constante
         datos.cv = 717.5; %[J/(kg*K)] Calor especifico a volumen constante
         datos.rho = 1.225; % [kg/m3] Densidad
         datos.kk = 0.025; %[W/mK] Conductividad termica
@@ -49,7 +49,7 @@ tic
             % traería
 
             % Condicion de contorno de conveccion Y=0
-            cc_inlet = @(x,t) 500     %(3+0.02*t)*100 ; 
+            cc_inlet = @(x,t) 500;   %(3+0.02*t)*100 ; 
         
         % - Con respecto a la conducción, se establece esta condición de
             % contorno únicamente en las paredes laterales X=0, X=L. Se
@@ -58,8 +58,8 @@ tic
             % de estas sería mínima.
 
             % Condiciones de contorno de conduccion (Dirichlet) X=0, X=L
-            cc_left = @(y,t) 600      %(30*(0.1-y))*150 ; 
-            cc_right = @(y,t) 800     %(30*y)*150 ; 
+            cc_left = @(y,t) 600;    %(30*(0.1-y))*150 ; 
+            cc_right = @(y,t) 800;   %(30*y)*150 ; 
             
             % Condiciones de contorno de conduccion (Neumann) X=0, X=L
             % cc_left = @(y,t) 1000*(300*y+0.06*t) ;
@@ -81,7 +81,7 @@ tic
 
         N_max = 100;
 
-        stopping_condition = @(n, new_w, w) max_iter(n, N_max)
+        stopping_condition = @(n, new_w, w) max_iter(n, N_max);
 
     % Intervalo de tiempo : Variable escalar dependiente del tiempo
         %   - Constante : dt
@@ -98,8 +98,7 @@ tic
 
     % Problem : Definición física del problema
 
-        problem=@(w,t) temp(w, t, grid, @campo_velocidad, datos, ...
-                            Tipo_CC, @cc_inlet, @cc_left, @cc_right)
+        % problem=@(w,t) temp(w, t, grid, @campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right);
 
     % Inicialización : T_0
 

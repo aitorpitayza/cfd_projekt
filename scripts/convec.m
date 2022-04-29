@@ -48,7 +48,7 @@ C_BC = zeros(N, N);
 
  for i = 1:N
 
-    velocidad = v(Rc(i,1), Rc(i,2), t);
+    velocidad = v( Rc(i,1), Rc(i,2), t)
 
      for j = 1:3
 

@@ -231,25 +231,25 @@ end
                 if (normal_x == 0) & (normal_y == -1)
 
                     % Bottom CC
-                    grid_preproc.connectivity(ii,jj)
+                    % grid_preproc.connectivity(ii,jj)
                     conectividad_celda(jj) = -3;
 
                 elseif (normal_x == 0) & (normal_y == 1)
 
                     % Top CC
-                    grid_preproc.connectivity(ii,jj)
+                    % grid_preproc.connectivity(ii,jj)
                     conectividad_celda(jj) = -4;
 
                 elseif (normal_x == -1) & (normal_y == 0)
 
                     % Left CC
-                    grid_preproc.connectivity(ii,jj)
+                    % grid_preproc.connectivity(ii,jj)
                     conectividad_celda(jj) = -1;
 
                 elseif (normal_x == 1) & (normal_y == 0)
 
                     % Right CC
-                    grid_preproc.connectivity(ii,jj)
+                    % grid_preproc.connectivity(ii,jj)
                     conectividad_celda(jj) = -2;
 
                 end
