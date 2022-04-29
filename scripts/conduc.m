@@ -53,9 +53,9 @@ for i = 1:N
         if ( k > 0 )
  
             % Normal exterior para la cara j de la celda i
-            n = [Normalesx(i,j); Normalesy(i,j)]; %Normal a la cara j de la celda i       
-            ri = [Rc(i,1); Rc(i,2)];
-            rj = [Rc(k,1); Rc(k,2)];
+            n = [Normalesx(i,j) Normalesy(i,j)]; %Normal a la cara j de la celda i       
+            ri = [Rc(i,1) Rc(i,2)];
+            rj = [Rc(k,1) Rc(k,2)];
             vect = ri - rj;
             dist = norm(vect);   
             dn = producto_escalar(vect,n);
@@ -69,9 +69,9 @@ for i = 1:N
             if (Tipo_CC(1) == 1) % Dirichlet
 
                 % Normal exterior para la cara j de la celda i   
-                n = [Normalesx(i,j);Normalesy(i,j)]; 
-                ri = [Rc(i,1); Rc(i,2)];
-                rj = [min(Rn(:,1)); Rc(i,2)];
+                n = [Normalesx(i,j) Normalesy(i,j)]; 
+                ri = [Rc(i,1)  Rc(i,2)];
+                rj = [min(Rn(:,1))  Rc(i,2)];
                 vect = ri - rj;
                 dist = norm(vect);
                 dn = producto_escalar(vect,n);
@@ -89,10 +89,10 @@ for i = 1:N
             if (Tipo_CC(1) == 1) % Dirichlet
 
                 % Normal exterior para la cara j de la celda i
-                n = [Normalesx(i,j);Normalesy(i,j)];
+                n = [Normalesx(i,j) Normalesy(i,j)];
                 
-                ri = [Rc(i,1); Rc(i,2)];
-                rj = [max(Rn(:,1)); Rc(i,2)];
+                ri = [Rc(i,1)  Rc(i,2)];
+                rj = [max(Rn(:,1)) Rc(i,2)];
                 vect = ri - rj;
                 dist = norm(vect);
                 dn = producto_escalar(vect,n);
