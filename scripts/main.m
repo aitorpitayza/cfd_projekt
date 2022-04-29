@@ -6,12 +6,28 @@ tic
 
 %%% Parámetros del problema a rellenar por el usuario %%%
 
+    % Archivos de datos
+
+        filenames = ["../data/nodes_4.dat" ...
+                        "../data/cells_4.dat"...
+                        "../data/bc_1_4.dat"...
+                        "../data/bc_2_4.dat"...
+                        "../data/bc_3_4.dat"...
+                        "../data/bc_4_4.dat"];
+
+        [grid_data, bc_nodes] = grid_loader(filenames);
+
+    % Inicialización de la malla y cálculos previos 
+
+        grid = mesher(grid_data);
+
     % Propiedades del fluido 
         
-        cp = 1004.5 %[J/(kg*K)] Calor especifico a presión constante
-        cv = 717.5; %[J/(kg*K)] Calor especifico a volumen constante
-        rho = 1.225; % [kg/m3] Densidad
-        kk = 0.025; %[W/mK] Conductividad termica
+        datos.cp = 1004.5 %[J/(kg*K)] Calor especifico a presión constante
+        datos.cv = 717.5; %[J/(kg*K)] Calor especifico a volumen constante
+        datos.rho = 1.225; % [kg/m3] Densidad
+        datos.kk = 0.025; %[W/mK] Conductividad termica
+        
         
     % Campos de velocidad y temperatura iniciales
         
@@ -33,7 +49,7 @@ tic
             % traería
 
             % Condicion de contorno de conveccion Y=0
-            T_conv_cc = @(x,t) 500     %(3+0.02*t)*100 ; 
+            cc_inlet = @(x,t) 500     %(3+0.02*t)*100 ; 
         
         % - Con respecto a la conducción, se establece esta condición de
             % contorno únicamente en las paredes laterales X=0, X=L. Se
@@ -41,15 +57,13 @@ tic
             % contorno en las paredes permeables ya que la contribución física
             % de estas sería mínima.
 
-        
-        
             % Condiciones de contorno de conduccion (Dirichlet) X=0, X=L
-            T_cc_D_cond_left = @(y,t) 600      %(30*(0.1-y))*150 ; 
-            T_cc_D_cond_right = @(y,t) 800     %(30*y)*150 ; 
+            cc_left = @(y,t) 600      %(30*(0.1-y))*150 ; 
+            cc_right = @(y,t) 800     %(30*y)*150 ; 
             
             % Condiciones de contorno de conduccion (Neumann) X=0, X=L
-            Grad_cc_N_izq = @(y,t) %1000*(300*y+0.06*t) ;
-            Grad_cc_N_dcha = @(y,t) %1000*(300*y+0.06*t) ;
+            % cc_left = @(y,t) 1000*(300*y+0.06*t) ;
+            % cc_right = @(y,t) 1000*(300*y+0.06*t) ;
         
         % A continuacion seleccionaremos el tipo de condicion de contorno en 
         % conduccion:
@@ -57,20 +71,36 @@ tic
         % Tipo = 1 ; si Dirichlet
         % Tipo = 2 ; si Neumann
         
-        Tipo = 2;
+        % Primer elemento, tipo de condición en izqda y segundo elemento, tipo  
+        % de condición a la derecha. Ser consecuente en las CC!!!!!
+        Tipo_CC = [1, 1];
 
+    % Stopping condition : Variable booleana (True (seguir) or false (parar)) 
+        %   - Número de iteraciones máximas : n
+        %   - Convergencia mínima entre pasos temporales : convergencia
 
+        N_max = 100;
 
-filenames = ["../data/nodes_4.dat" ...
-                "../data/cells_4.dat"...
-                "../data/bc_1_4.dat"...
-                "../data/bc_2_4.dat"...
-                "../data/bc_3_4.dat"...
-                "../data/bc_4_4.dat"];
+        stopping_condition = @(n, new_w, w) max_iter(n, N_max)
 
-[grid_data, bc_nodes] = grid_loader(filenames);
+    % Intervalo de tiempo : Variable escalar dependiente del tiempo
+        %   - Constante : dt
+        %   - Variable : Más pequeño al principio para definir mejor los cambios
+        %                bruscos y mas grande al final ya que el sistema se 
+        %                estabiliza.
 
-grid = mesher(grid_data);
+        dt_calculator = constant_dt(1e-3);
+
+    % Propagador : Esquema de propagación temporal
+
+        propagator = @euler_implicito;
+        % propagator = @crank_nicolson;
+
+    % Problem : Definición física del problema
+
+        problem=@(w,t) temp(w, t, grid, campo_velocidad, datos, ...
+                            Tipo_CC, cc_inlet, cc_left, cc_right)
+
 
 
 toc
