@@ -27,10 +27,10 @@ function [dT_dt] = temp(T, t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_rig
 % ------------- Términos convectivos -------------
 
 % Matrices
-[C, C_BC] = convec( grid, @(x,y,t) v, t);
+[C, C_BC] = convec( grid, v, t);
 
 % Término independiente
-c_bc = cc_convec( @(x,t) cc_inlet, grid, @(x,y,t) v, t);
+c_bc = cc_convec( cc_inlet, grid, v, t);
 
 % ------------- Términos conductivos -------------
 
@@ -43,7 +43,7 @@ cv = datos.cv;
 [K, K_BC ] = conduc(grid, Tipo_CC);
 
 % Término independiente
-k_bc = cc_conduc( @(y,t) cc_left, @(y,t) cc_right, grid, t, Tipo_CC);
+k_bc = cc_conduc(cc_left, cc_right, grid, t, Tipo_CC);
 
 % Suma de todos los términos
 dT_dt = K * kk / (rho *  cv) * T + K_BC * kk / (rho *  cv) * T + k_bc + ...

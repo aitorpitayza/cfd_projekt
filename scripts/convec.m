@@ -46,9 +46,11 @@ Vecinos = grid.connectivity;
 C = zeros(N, N);
 C_BC = zeros(N, N);
 
+
+
  for i = 1:N
 
-    velocidad = v( Rc(i,1), Rc(i,2), t)
+    velocidad = v(Rc(i,1), Rc(i,2), t)
 
      for j = 1:3
 
@@ -60,7 +62,7 @@ C_BC = zeros(N, N);
                 
             n = [Normalesx(i,j);Normalesy(i,j)]; %Normal a la cara j de la celda i       
 
-            vn =  velocidad * n;
+            vn =  producto_escalar(velocidad, n);
             
             if vn < 0 %celda vecina aguas arriba
 
@@ -87,4 +89,5 @@ C = sparse(C);
 C_BC = sparse(C_BC);
 
 end
+
 

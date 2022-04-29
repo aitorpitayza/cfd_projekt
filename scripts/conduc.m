@@ -53,7 +53,7 @@ for i = 1:N
         if ( k > 0 )
  
             % Normal exterior para la cara j de la celda i
-            n = [Normalesx(i,j);Normalesy(i,j)]; %Normal a la cara j de la celda i       
+            n = [Normalesx(i,j); Normalesy(i,j)]; %Normal a la cara j de la celda i       
             ri = [Rc(i,1); Rc(i,2)];
             rj = [Rc(k,1); Rc(k,2)];
             vect = ri - rj;
@@ -75,7 +75,7 @@ for i = 1:N
                 vect = ri - rj;
                 dist = norm(vect);
                 dn = producto_escalar(vect,n);
-                cond1 = -Areas(i,j)*dn/(Vol(i)*dist^2); 
+                cond1 = -Areas(i,j) * dn / (Vol(i) * dist^2); 
                 K_BC(i,i) = K_BC(i,i) - cond1;
 
             elseif (Tipo_CC(1) == 2) % Neumann
