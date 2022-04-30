@@ -1,5 +1,5 @@
-function [ Matriz_Temp, vec_t_sol,dT] = integrador_temporal(grid, datos_integracion, ...
-    datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC)
+function [ Matriz_Temp, vec_t_sol,dT] = integrador_temporal(campo_velocidad, T_ci,...
+     cc_left,cc_right, cc_inlet, datos, Tipo_CC, datos_integracion)
 
 % Esta funcion permite obtener los valores de temperatura en cada instante
 % mediante una discretizacion y los almacena en la matriz de temperaturas Matriz_Temp.
@@ -60,16 +60,14 @@ function [ Matriz_Temp, vec_t_sol,dT] = integrador_temporal(grid, datos_integrac
 
 %% Aquí se define la velocidad en los centroides v(x,y). Ya veremos como hacerla dependiente del tiempo v(x,y,t). 
 
-Courant = datos_integracion.Courant;
-dt1 = datos_integracion.dt1;
-t_max = datos_integracion.t_max;
-Tipo_integrador = datos_integracion.Tipo_integrador;
+Courant = datos_integracion.Courant
+dt1 = datos_integracion.dt1
+t_max = datos_integracion.t_max
+Tipo_integrador = datos_integracion.Tipo_integrador
 
-Rc = grid.Rc;
-N = grid.N;
-Vol = grid.volumes;
 
-[v] = Matriz_Veloc(Rc , N, campo_velocidad); % Esto está anulado porque en
+
+[v] = Matriz_Veloc(grid.Rc , grid.N, campo_velocidad); % Esto está anulado porque en
 %la función temp necesita una función.
 
 % Se calcula el dT mediante una aproximación debido a que es un caso bidimensional

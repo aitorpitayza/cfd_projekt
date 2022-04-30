@@ -1,4 +1,4 @@
-function [dT_dt] = temp(T, t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
+function [A, b] = temp(T, t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
 
 % Esta función representa la EDO ya discretizada con las matrices de los 
 % términos ya calculadas.
@@ -21,7 +21,7 @@ function [dT_dt] = temp(T, t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_rig
 %       
 % --- Outputs ---
 %
-%       dT_dt : Vector derivada temporal de la temperatura en cada celda.
+%       A : 
 %
 
 % ------------- Términos convectivos -------------
@@ -46,5 +46,7 @@ cv = datos.cv;
 k_bc = cc_conduc(cc_left, cc_right, grid, t, Tipo_CC);
 
 % Suma de todos los términos
-dT_dt = K * kk / (rho *  cv) * T + K_BC * kk / (rho *  cv) * T + k_bc + ...
-        C * T + C_BC * T + c_bc;
+A = K * kk / (rho *  cv) + K_BC * kk / (rho *  cv) + ...
+        C + C_BC;
+
+b = k_bc + c_bc;

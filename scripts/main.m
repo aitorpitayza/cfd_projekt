@@ -75,7 +75,15 @@ tic
         % de condición a la derecha. Ser consecuente en las CC!!!!!
         Tipo_CC = [1, 1];
 
-    % Stopping condition : Variable booleana (True (seguir) or false (parar)) 
+       %% Datos integrador
+       datos_integracion.Courant = 20; %Valor del número de Courant
+       datos_integracion.dt1 = 0.3; %Paso temporal (s)
+       datos_integracion.t_max = 60; %Tiempo máximo de resolución (s)
+       datos_integracion.Tipo_integrador = 1; % Tipo de integrador
+                                              % 1 = Euler implicito
+                                              % 2 = Crank Nicolson
+
+       %% Stopping condition : Variable booleana (True (seguir) or false (parar)) 
         %   - Número de iteraciones máximas : n
         %   - Convergencia mínima entre pasos temporales : convergencia
 
@@ -83,28 +91,20 @@ tic
 
         stopping_condition = @(n, new_w, w) max_iter(n, N_max);
 
-    % Intervalo de tiempo : Variable escalar dependiente del tiempo
-        %   - Constante : dt
-        %   - Variable : Más pequeño al principio para definir mejor los cambios
-        %                bruscos y mas grande al final ya que el sistema se 
-        %                estabiliza.
+        %% Inicialización del problema
 
-        dt_calculator = constant_dt(1e-3);
+        [ Matriz_Temp, vec_t_sol,dT] = integrador_temporal(grid, datos_integracion, ...
+        datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
 
-    % Propagador : Esquema de propagación temporal
+        %% Representación gráfica
+        % ........................
+              
+        % Dentro de esta funcion se puede seleccionar los instantes en los que se
+        % desea que se realice el graficado. Estas puestos unos en concreto por
+        % defecto, pero deben cambiarse en funcion de lo que desee observar.
+         
+        grafica(Temp,matriz_x,matriz_y,dT)
 
-        propagator = @euler_implicito;
-        % propagator = @crank_nicolson;
-
-    % Problem : Definición física del problema
-
-        % problem=@(w,t) temp(w, t, grid, @campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right);
-
-    % Inicialización : T_0
-
-        T_0 = ones(grid.N, 1);
-
-    temp(T_0, 0 , grid, campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
 
 
 
