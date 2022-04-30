@@ -117,7 +117,7 @@ for i=1:Num_contador
 
 if Tipo_integrador == 1
     %Dudas si aqui se le pasa b o b_1
-    [Matriz_Temp(:,i+1)]= euler_implicito( A_1, b, dt, Tempi,N);
+    [Matriz_Temp(:,i+1)]= euler_implicito( A_1, b_1, dt, Tempi,N);
 
     
 elseif Tipo_integrador == 2
