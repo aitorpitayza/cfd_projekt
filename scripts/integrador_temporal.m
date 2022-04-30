@@ -1,4 +1,4 @@
-function [ Matriz_Temp, vec_t_sol,dT] = integrador_temporal(grid, datos_integracion, ...
+function [ Matriz_Temp,dt] = integrador_temporal(grid, datos_integracion, ...
     datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC)
 
 % Esta funcion permite obtener los valores de temperatura en cada instante
@@ -65,7 +65,7 @@ dt1 = datos_integracion.dt1;
 t_max = datos_integracion.t_max;
 Tipo_integrador = datos_integracion.Tipo_integrador;
 
-Rc = grid.Rc;
+Rc = grid.centroid;
 N = grid.N;
 Vol = grid.volumes;
 
@@ -87,7 +87,7 @@ n_pasos = ceil(t_max/dt)+1;
 % tiempo total/tamaño del paso porque para el último paso se necesita el 
 % paso siguiente.
 
-[T_ini] = cond_inicial(Rc,N,T_ci);
+[T_ini] = Matriz_T_inicial(Rc,N,T_ci);
 
 Matriz_Temp = T_ini';
 t_sol = 0;
@@ -104,7 +104,7 @@ for i=1:Num_contador
     
     if i==1
     
-    [A,b] = temp(T, tiempo, grid, campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
+    [A,b] = temp(tiempo, grid, campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right);
     
     else
      
@@ -113,7 +113,7 @@ for i=1:Num_contador
      
     end
           
-    [A_1, b_1]  = temp(T, tiempo_siguiente, grid, campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
+    [A_1, b_1]  = temp(tiempo_siguiente, grid, campo_velocidad, datos, Tipo_CC, cc_inlet, cc_left, cc_right);
 
 if Tipo_integrador == 1
     %Dudas si aqui se le pasa b o b_1

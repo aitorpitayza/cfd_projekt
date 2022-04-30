@@ -92,7 +92,7 @@ for i = 1:N
                 
                 dn = producto_escalar(vect,n);
                     
-                K_bc(i) = -Areas(i,2*j-1)*dn/Vol(i)/dist^2 * ...
+                K_bc(i) = -Areas(i,j)*dn/Vol(i)/dist^2 * ...
                                             T_cc_D_cond_right(Rc(i,2),t);
 
             elseif (Tipo_CC(2) == 2) % Neumann

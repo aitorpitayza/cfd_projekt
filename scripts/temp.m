@@ -1,4 +1,4 @@
-function [A, b] = temp(T, t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
+function [A, b] = temp(t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
 
 % Esta función representa la EDO ya discretizada con las matrices de los 
 % términos ya calculadas.

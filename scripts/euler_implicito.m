@@ -22,7 +22,7 @@ MatI=eye(N);
 M_sys= MatI-dT*MatA_n1;
 M_sys= sparse(M_sys); 
     
-Temp = M_sys\(Tempi + dT*VectB');
+Temp = M_sys\(Tempi + dT*VectB);
 
 
 end

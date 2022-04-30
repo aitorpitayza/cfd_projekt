@@ -8,12 +8,12 @@ tic
 
     % Archivos de datos
 
-        filenames = ["../data/nodes_4.dat" ...
-                        "../data/cells_4.dat"...
-                        "../data/bc_1_4.dat"...
-                        "../data/bc_2_4.dat"...
-                        "../data/bc_3_4.dat"...
-                        "../data/bc_4_4.dat"];
+        filenames = ["../data/nodes_4096.dat" ...
+                        "../data/cells_4096.dat"...
+                        "../data/bc_1_4096.dat"...
+                        "../data/bc_2_4096.dat"...
+                        "../data/bc_3_4096.dat"...
+                        "../data/bc_4_4096.dat"];
 
         [grid_data, bc_nodes] = grid_loader(filenames);
 
@@ -93,7 +93,7 @@ tic
 
         %% Inicialización del problema
 
-        [ Matriz_Temp, vec_t_sol,dT] = integrador_temporal(grid, datos_integracion, ...
+        [ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
         datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
 
         %% Representación gráfica
@@ -102,10 +102,20 @@ tic
         % Dentro de esta funcion se puede seleccionar los instantes en los que se
         % desea que se realice el graficado. Estas puestos unos en concreto por
         % defecto, pero deben cambiarse en funcion de lo que desee observar.
-         
-        grafica(Temp,matriz_x,matriz_y,dT)
+        
+        matriz_x = zeros(3,grid.N);
+        matriz_y = zeros(3,grid.N);
+                
+        for i = 1:grid.N
+        for j = 1:3
+        matriz_x(j,i) = grid.nodes(grid.cells(i,j),1);
+        matriz_y(j,i) = grid.nodes(grid.cells(i,j),2);
+        end
+        end 
+        
+        grafica(Matriz_Temp,matriz_x,matriz_y,dt_sol)
 
-
+        
 
 
 toc
