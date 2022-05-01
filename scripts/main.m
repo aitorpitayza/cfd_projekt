@@ -6,7 +6,7 @@ tic
 
 %%% Parámetros del problema a rellenar por el usuario %%%
     
-    celdas = 256; %Número de celdas de la malla
+    celdas = 4096; %Número de celdas de la malla
     
     % Archivos de datos
         filenames = ["../data/nodes_"+num2str(celdas)+".dat" ...
@@ -25,7 +25,7 @@ tic
     % Propiedades del fluido 
         
         datos.cp = 1004.5; %[J/(kg*K)] Calor especifico a presión constante
-        datos.cv = 717.5; %[J/(kg*K)] Calor especifico a volumen constante
+        datos.cv = 7.175; %[J/(kg*K)] Calor especifico a volumen constante
         datos.rho = 1.225; % [kg/m3] Densidad
         datos.kk = 0.025; %[W/mK] Conductividad termica
         
@@ -36,7 +36,7 @@ tic
         campo_velocidad = @(x,y,t) [0;(0.005+(0.05-x)*2)*0.02];
         
         % Distribución de temperatura inicial
-        T_ci = @(x,y) (y)*4000;
+        T_ci = @(x,y) 500 %(y)*4000;
 
     % Condiciones de contorno, dónde se toman las siguientes
     % suponsiciones a la hora de crearlas:
@@ -50,7 +50,7 @@ tic
             % traería
 
             % Condicion de contorno de conveccion Y=0
-            cc_inlet = @(x,t) 500;   %(3+0.02*t)*100 ; 
+            cc_inlet = @(x,t) 300;   %(3+0.02*t)*100 ; 
         
         % - Con respecto a la conducción, se establece esta condición de
             % contorno únicamente en las paredes laterales X=0, X=L. Se
@@ -77,9 +77,9 @@ tic
         Tipo_CC = [1, 1];
 
        %% Datos integrador
-       datos_integracion.Courant = 20; %Valor del número de Courant
+       datos_integracion.Courant = 0.1; %Valor del número de Courant
        datos_integracion.dt1 = 0.3; %Paso temporal (s)
-       datos_integracion.t_max = 60; %Tiempo máximo de resolución (s)
+       datos_integracion.t_max = 10; %Tiempo máximo de resolución (s)
        datos_integracion.Tipo_integrador = 1; % Tipo de integrador
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
@@ -94,6 +94,8 @@ tic
 
         %% Inicialización del problema
 
+        %[ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
+        %datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
         [ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
         datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
 

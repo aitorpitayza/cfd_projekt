@@ -25,5 +25,5 @@ function [ Temp] = crank_nicolson( MatA, MatA_n1, VectB,...
 MatI=eye(N);
 
     Temp = (MatI-0.5*dT*MatA_n1)\(Tempi+0.5*dT*MatA*Tempi +...
-           0.5*dT*VectB' + 0.5*dT*VectB_n1');
+           0.5*dT*VectB + 0.5*dT*VectB_n1);
 end
