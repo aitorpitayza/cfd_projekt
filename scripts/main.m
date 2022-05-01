@@ -92,19 +92,20 @@ tic
 
         stopping_condition = @(n, new_w, w) max_iter(n, N_max);
 
-        %% Inicialización del problema
+%%% Inicialización del problema
 
-        %[ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
-        %datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
-        [ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
-        datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
+    %[ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
+    % datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
 
-        %% Representación gráfica
-        % ........................
+    [ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
+    datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
+
+%%% Representación gráfica
+
               
-        % Dentro de esta funcion se puede seleccionar los instantes en los que se
-        % desea que se realice el graficado. Estas puestos unos en concreto por
-        % defecto, pero deben cambiarse en funcion de lo que desee observar.
+    % Dentro de esta funcion se puede seleccionar los instantes en los que se
+    % desea que se realice el graficado. Estas puestos unos en concreto por
+    % defecto, pero deben cambiarse en funcion de lo que desee observar.
         
         matriz_x = zeros(3,grid.N);
         matriz_y = zeros(3,grid.N);
