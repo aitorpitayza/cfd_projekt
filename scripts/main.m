@@ -6,7 +6,7 @@ tic
 
 %%% Parámetros del problema a rellenar por el usuario %%%
     
-    celdas = 4096; %Número de celdas de la malla
+    celdas = 256; %Número de celdas de la malla
     
     % Archivos de datos
         filenames = ["../data/nodes_"+num2str(celdas)+".dat" ...
@@ -14,7 +14,7 @@ tic
         "../data/bc_1_"+num2str(celdas)+".dat"...
         "../data/bc_2_"+num2str(celdas)+".dat"...
         "../data/bc_3_"+num2str(celdas)+".dat"...
-        "../data/bc_4_"+num2str(celdas)+".dat"]
+        "../data/bc_4_"+num2str(celdas)+".dat"];
 
         [grid_data, bc_nodes] = grid_loader(filenames);
 
@@ -36,7 +36,7 @@ tic
         campo_velocidad = @(x,y,t) [0;(0.005+(0.05-x)*2)*0.02];
         
         % Distribución de temperatura inicial
-        T_ci = @(x,y) 500 %(y)*4000;
+        T_ci = @(x,y) 500; %(y)*4000;
 
     % Condiciones de contorno, dónde se toman las siguientes
     % suponsiciones a la hora de crearlas:

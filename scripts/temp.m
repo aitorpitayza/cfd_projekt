@@ -49,4 +49,4 @@ k_bc = cc_conduc(cc_left, cc_right, grid, t, Tipo_CC);
 A = K * kk / (rho *  cv) + K_BC * kk / (rho *  cv) + ...
         C + C_BC;
 
-b = k_bc + c_bc;
+b = k_bc * kk / (rho *  cv) + c_bc;
