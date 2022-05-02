@@ -61,10 +61,10 @@ for i = 1:N
 
             if (Tipo_CC(1) == 1) % Dirichlet
 
-                n = [Normalesx(i,j) Normalesy(i,j)]; 
+                n = [Normalesx(i,j) Normalesy(i,j)]'; 
         
-                ri = [Rc(i,1) Rc(i,2)];
-                rj = [0 Rc(i,2)];
+                ri = [Rc(i,1) Rc(i,2)]';
+                rj = [0 Rc(i,2)]';
                 vect = ri - rj;
                 dist = norm(vect);
                 
@@ -83,10 +83,10 @@ for i = 1:N
 
             if (Tipo_CC(2) == 1) % Dirichlet
 
-                n= [Normalesx(i,j) Normalesy(i,j)]; 
+                n= [Normalesx(i,j) Normalesy(i,j)]'; 
             
-                ri = [Rc(i,1)  Rc(i,2)];
-                rj = [max(Rn(:,1)) Rc(i,2)];
+                ri = [Rc(i,1)  Rc(i,2)]';
+                rj = [max(Rn(:,1)) Rc(i,2)]';
                 vect = ri - rj;
                 dist = norm(vect);
                 

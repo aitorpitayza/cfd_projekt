@@ -12,5 +12,5 @@ function [ producto ] = producto_escalar( v1, v2 )
 %
 %   - producto: resultado del producto escalar.
 
-producto = v1*v2';
+producto = v1'*v2;
 end

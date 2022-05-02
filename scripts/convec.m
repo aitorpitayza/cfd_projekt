@@ -74,9 +74,10 @@ C_BC = zeros(N, N);
                      
             end
 
-        elseif (k == -4) % Top CC
+        elseif (k == -4) % Top (Bot) CC
 
-            C_BC( i,i ) = - Areas( i, j ) * norm(v(Rc(i,1), Rc(i,2), t))/ Vol(i);
+            C_BC( i,i ) = C_BC( i,i ) - Areas( i, j ) * norm(v(Rc(i,1),...
+                                                    Rc(i,2), t))/ Vol(i);
 
         end
 

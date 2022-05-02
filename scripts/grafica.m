@@ -49,58 +49,67 @@ T_max4 = max(Temp_4);
 T_max5 = max(Temp_5);
 T_max6 = max(Temp_6);
 
+T_min1 = min(Temp_1);
+T_min2 = min(Temp_2);
+T_min3 = min(Temp_3);
+T_min4 = min(Temp_4);
+T_min5 = min(Temp_5);
+T_min6 = min(Temp_6);
+
 T_maxvector = [T_max1,T_max2,T_max3,T_max4,T_max5,T_max6];
+T_minvector = [T_min1,T_min2,T_min3,T_min4,T_min5,T_min6];
 % T_maxvector = [T_max1,T_max2,T_max3,T_max6];
 T_max = max(T_maxvector);
-colormap hot
+T_min = min(T_minvector);
+colormap (flipud (hot))
 figure (1)
 subplot(1,6,1)
 patch(matriz_x,matriz_y,Temp_1,'EdgeColor','none')
 caxis manual
-caxis([0 T_max])
+caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_1$ = ' num2str(fix(t1*dT)) ' s'],'Interpreter','Latex')
 
 subplot(1,6,2)
 patch(matriz_x,matriz_y,Temp_2,'EdgeColor','none')
 caxis manual
-caxis([0 T_max])
+caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_2$ = ' num2str(t2*dT) ' s'],'Interpreter','Latex')
 
 subplot(1,6,3)
 patch(matriz_x,matriz_y,Temp_3,'EdgeColor','none')
 caxis manual
-caxis([0 T_max])
+caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_3$ = ' num2str(t3*dT) ' s'],'Interpreter','Latex')
 
 subplot(1,6,4)
 patch(matriz_x,matriz_y,Temp_4,'EdgeColor','none')
 caxis manual
-caxis([0 T_max])
+caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_4$ = ' num2str(t4*dT) ' s'],'Interpreter','Latex')
 
 subplot(1,6,5)
 patch(matriz_x,matriz_y,Temp_5,'EdgeColor','none')
 caxis manual
-caxis([0 T_max])
+caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_5$ = ' num2str(t5*dT) ' s'],'Interpreter','Latex')
 
 subplot(1,6,6)
 patch(matriz_x,matriz_y,Temp_6,'EdgeColor','none')
 caxis manual
-caxis([0 T_max])
+caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_6$ = ' num2str(t6*dT) ' s'],'Interpreter','Latex')
 
 figure (2)
-colormap hot
+colormap (flipud(hot))
 patch(matriz_x,matriz_y,Temp_6,'EdgeColor','none')
 caxis manual
-caxis([0 T_max])
+caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_6$ = ' num2str(t6*dT) ' s'],'Interpreter','Latex')
 

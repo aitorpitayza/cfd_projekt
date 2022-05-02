@@ -53,7 +53,7 @@ for i = 1:N
 
         if (k == -3) % Bottom CC
            
-            c_bc( i ) = 1 / Vol( i ) * Areas( i, j ) * ...
+            c_bc( i ) = c_bc( i ) + 1 / Vol( i ) * Areas( i, j ) * ...
                 norm(v(Rc(i,1), Rc(i,2), t)) * T_conv_cc(Rc(i,1),t);
             
         end
