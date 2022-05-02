@@ -25,7 +25,7 @@ tic
     % Propiedades del fluido 
         
         datos.cp = 1004.5; %[J/(kg*K)] Calor especifico a presión constante
-        datos.cv = 7.175; %[J/(kg*K)] Calor especifico a volumen constante
+        datos.cv = 717.5; %[J/(kg*K)] Calor especifico a volumen constante
         datos.rho = 1.225; % [kg/m3] Densidad
         datos.kk = 0.025; %[W/mK] Conductividad termica
         
@@ -33,10 +33,10 @@ tic
     % Campos de velocidad y temperatura iniciales
         
         % Campo de velocidad inicial
-        campo_velocidad = @(x,y,t) [0;(0.005+(0.05-x)*2)*0.02];
+        campo_velocidad = @(x,y,t) [0;0.1]; %[0;(0.005+(0.05-x)*2)*0.02];
         
         % Distribución de temperatura inicial
-        T_ci = @(x,y) 500; %(y)*4000;
+        T_ci = @(x,y) 200; %(y)*4000;
 
     % Condiciones de contorno, dónde se toman las siguientes
     % suponsiciones a la hora de crearlas:
@@ -50,7 +50,7 @@ tic
             % traería
 
             % Condicion de contorno de conveccion Y=0
-            cc_inlet = @(x,t) 300;   %(3+0.02*t)*100 ; 
+            cc_inlet = @(x,t) 10;   %(3+0.02*t)*100 ; 
         
         % - Con respecto a la conducción, se establece esta condición de
             % contorno únicamente en las paredes laterales X=0, X=L. Se
@@ -59,8 +59,8 @@ tic
             % de estas sería mínima.
 
             % Condiciones de contorno de conduccion (Dirichlet) X=0, X=L
-            cc_left = @(y,t) 600;    %(30*(0.1-y))*150 ; 
-            cc_right = @(y,t) 800;   %(30*y)*150 ; 
+            cc_left = @(y,t) 500;    %(30*(0.1-y))*150 ; 
+            cc_right = @(y,t) 500;   %(30*y)*150 ; 
             
             % Condiciones de contorno de conduccion (Neumann) X=0, X=L
             % cc_left = @(y,t) 1000*(300*y+0.06*t) ;
@@ -77,9 +77,9 @@ tic
         Tipo_CC = [1, 1];
 
        %% Datos integrador
-       datos_integracion.Courant = 0.1; %Valor del número de Courant
-       datos_integracion.dt1 = 0.3; %Paso temporal (s)
-       datos_integracion.t_max = 10; %Tiempo máximo de resolución (s)
+       datos_integracion.Courant = 50; %Valor del número de Courant
+       datos_integracion.dt1 = 0.01; %Paso temporal (s)
+       datos_integracion.t_max = 1; %Tiempo máximo de resolución (s)
        datos_integracion.Tipo_integrador = 1; % Tipo de integrador
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
