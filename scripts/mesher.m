@@ -207,8 +207,8 @@ end
 
     end
 
-    grid_preproc.BCtop = cells_top(grid_preproc.nodes, grid_preproc.cells);
-    grid_preproc.BCbot = cells_bottom(grid_preproc.nodes, grid_preproc.cells);
+    % grid_preproc.BCtop = cells_top(grid_preproc.nodes, grid_preproc.cells);
+    % grid_preproc.BCbot = cells_bottom(grid_preproc.nodes, grid_preproc.cells);
 
     for ii=1:length(grid_preproc.cells(:,1))
 

@@ -6,7 +6,7 @@ tic
 
 %%% Parámetros del problema a rellenar por el usuario %%%
     
-    celdas = 1024; %Número de celdas de la malla
+    celdas = 256; %Número de celdas de la malla
     
     % Archivos de datos
         filenames = ["../data/nodes_"+num2str(celdas)+".dat" ...

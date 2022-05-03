@@ -27,7 +27,8 @@ function [A, b] = temp(t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
 % ------------- Términos convectivos -------------
 
 % Matrices
-[C, C_BC] = convec( grid, v, t);
+% [C, C_BC] = convec( grid, v, t);
+[C, C_BC] = convec_gds( grid, v, t);
 
 % Término independiente
 c_bc = cc_convec( cc_inlet, grid, v, t);
