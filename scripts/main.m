@@ -107,7 +107,7 @@ tic
         end
         end 
         
-        grafica(Matriz_Temp,matriz_x,matriz_y,dt_sol)
+        % grafica(Matriz_Temp,matriz_x,matriz_y,dt_sol)
 
         
 
