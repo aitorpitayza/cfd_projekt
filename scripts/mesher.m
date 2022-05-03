@@ -23,8 +23,6 @@ function [grid_preproc] = mesher(grid_data, bc_nodes)
     % grid_preproc.connectivity: connectivity matrix. See notes, 2.
     % grid_preproc.areas: area matrix of the domain, cell-area.
     % grid_preproc.nx, grid_preproc.ny: (x,y) component of the normal vect.
-    % grid.BCtop :  Ver funcion cells_top
-    % grid.BCbot : Ver funcion cells_bottom
 
     %Notes: 
       
@@ -207,8 +205,7 @@ end
 
     end
 
-    % grid_preproc.BCtop = cells_top(grid_preproc.nodes, grid_preproc.cells);
-    % grid_preproc.BCbot = cells_bottom(grid_preproc.nodes, grid_preproc.cells);
+    %% Corrección de la matriz de conectividad.
 
     for ii=1:length(grid_preproc.cells(:,1))
 

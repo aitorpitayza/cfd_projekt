@@ -84,18 +84,8 @@ tic
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
 
-       %% Stopping condition : Variable booleana (True (seguir) or false (parar)) 
-        %   - Número de iteraciones máximas : n
-        %   - Convergencia mínima entre pasos temporales : convergencia
 
-        N_max = 100;
-
-        stopping_condition = @(n, new_w, w) max_iter(n, N_max);
-
-%%% Inicialización del problema
-
-    %[ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
-    % datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
+%%% Simulador
 
     [ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
     datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC);
