@@ -48,7 +48,7 @@ C_BC = zeros(N, N);
 
 
 
- for i = 1:N
+for i = 1:N
 
     velocidad = v(Rc(i,1), Rc(i,2), t);
 
@@ -64,23 +64,11 @@ C_BC = zeros(N, N);
 
             vn =  producto_escalar(velocidad, n);
             
-            if vn < 0 %celda vecina aguas aguas abajo
+            A = Areas(i,j);    
+            conv =  -A*vn ;
 
-                A = Areas(i,j);    
-                conv =  -A*vn ;
-
-                C(i,i) = C(i,i) - conv / (2*Vol(i)) ; %Flujo de energía entrando en la celda i
-                C(k,k) = C(k,k) - conv / (2*Vol(k));
-                     
-            else
-
-                A = Areas(i,j);    
-                conv =  -A*vn ;
-
-                C(i,i) = C(i,i) - conv / (2*Vol(i)) ; %Flujo de energía entrando en la celda i
-                C(k,k) = C(k,k) - conv / (2*Vol(k));
-
-            end
+            C(i,k) = conv / (2*Vol(i)) ;
+            C(i,i) = C(i,i) + conv / (2*Vol(i)) ; %Flujo de energía entrando en la celda i
 
         elseif (k == -4) % Top (Bot) CC
 

@@ -6,7 +6,7 @@ tic
 
 %%% Parámetros del problema a rellenar por el usuario %%%
     
-    celdas = 256; %Número de celdas de la malla
+    celdas = 4096; %Número de celdas de la malla
     
     % Archivos de datos
         filenames = ["../data/nodes_"+num2str(celdas)+".dat" ...
@@ -27,7 +27,7 @@ tic
         datos.cp = 1004.5; %[J/(kg*K)] Calor especifico a presión constante
         datos.cv = 717.5; %[J/(kg*K)] Calor especifico a volumen constante
         datos.rho = 1.225; % [kg/m3] Densidad
-        datos.kk = 0.025; %[W/mK] Conductividad termica
+        datos.kk = 0.025e-10; %[W/mK] Conductividad termica
         
         
     % Campos de velocidad y temperatura iniciales
@@ -77,7 +77,7 @@ tic
         Tipo_CC = [1, 1];
 
        %% Datos integrador
-       datos_integracion.Courant = 50000; %Valor del número de Courant
+       datos_integracion.Courant = 5; %Valor del número de Courant
        datos_integracion.dt1 = 0.01; %Paso temporal (s)
        datos_integracion.t_max = 1; %Tiempo máximo de resolución (s)
        datos_integracion.Tipo_integrador = 1; % Tipo de integrador
