@@ -4,7 +4,7 @@
 
 %Comparación Euler/Crank
 time = [];
-datos_integracion.Courant = 50;
+datos_integracion.Courant = 0.1;
 
 
 for w = 1:2
