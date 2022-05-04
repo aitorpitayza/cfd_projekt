@@ -1,6 +1,6 @@
  function grafica( Temp, matriz_x, matriz_y, dT)
  
-% Esta función se encarga de graficar las soluciones en diferentes
+% Esta funciÃ³n se encarga de graficar las soluciones en diferentes
 % tantes de tiempo.
 
 %   Entradas
@@ -70,48 +70,48 @@ caxis manual
 caxis([T_min T_max])
 colorbar('TickLabelInterpreter','latex','FontSize',tamano)
 title(['$t_1$ = ' num2str(fix(t1*dT)) ' s'],'Interpreter','Latex')
-
-subplot(1,6,2)
-patch(matriz_x,matriz_y,Temp_2,'EdgeColor','none')
-caxis manual
-caxis([T_min T_max])
-colorbar('TickLabelInterpreter','latex','FontSize',tamano)
-title(['$t_2$ = ' num2str(t2*dT) ' s'],'Interpreter','Latex')
-
-subplot(1,6,3)
-patch(matriz_x,matriz_y,Temp_3,'EdgeColor','none')
-caxis manual
-caxis([T_min T_max])
-colorbar('TickLabelInterpreter','latex','FontSize',tamano)
-title(['$t_3$ = ' num2str(t3*dT) ' s'],'Interpreter','Latex')
-
-subplot(1,6,4)
-patch(matriz_x,matriz_y,Temp_4,'EdgeColor','none')
-caxis manual
-caxis([T_min T_max])
-colorbar('TickLabelInterpreter','latex','FontSize',tamano)
-title(['$t_4$ = ' num2str(t4*dT) ' s'],'Interpreter','Latex')
-
-subplot(1,6,5)
-patch(matriz_x,matriz_y,Temp_5,'EdgeColor','none')
-caxis manual
-caxis([T_min T_max])
-colorbar('TickLabelInterpreter','latex','FontSize',tamano)
-title(['$t_5$ = ' num2str(t5*dT) ' s'],'Interpreter','Latex')
-
-subplot(1,6,6)
-patch(matriz_x,matriz_y,Temp_6,'EdgeColor','none')
-caxis manual
-caxis([T_min T_max])
-colorbar('TickLabelInterpreter','latex','FontSize',tamano)
-title(['$t_6$ = ' num2str(t6*dT) ' s'],'Interpreter','Latex')
-
-figure ()
-colormap (flipud(hot))
-patch(matriz_x,matriz_y,Temp_6,'EdgeColor','none')
-caxis manual
-caxis([T_min T_max])
-colorbar('TickLabelInterpreter','latex','FontSize',tamano)
-title(['$t_6$ = ' num2str(t6*dT) ' s'],'Interpreter','Latex')
+% 
+% subplot(1,6,2)
+% patch(matriz_x,matriz_y,Temp_2,'EdgeColor','none')
+% caxis manual
+% caxis([T_min T_max])
+% colorbar('TickLabelInterpreter','latex','FontSize',tamano)
+% title(['$t_2$ = ' num2str(t2*dT) ' s'],'Interpreter','Latex')
+% 
+% subplot(1,6,3)
+% patch(matriz_x,matriz_y,Temp_3,'EdgeColor','none')
+% caxis manual
+% caxis([T_min T_max])
+% colorbar('TickLabelInterpreter','latex','FontSize',tamano)
+% title(['$t_3$ = ' num2str(t3*dT) ' s'],'Interpreter','Latex')
+% 
+% subplot(1,6,4)
+% patch(matriz_x,matriz_y,Temp_4,'EdgeColor','none')
+% caxis manual
+% caxis([T_min T_max])
+% colorbar('TickLabelInterpreter','latex','FontSize',tamano)
+% title(['$t_4$ = ' num2str(t4*dT) ' s'],'Interpreter','Latex')
+% 
+% subplot(1,6,5)
+% patch(matriz_x,matriz_y,Temp_5,'EdgeColor','none')
+% caxis manual
+% caxis([T_min T_max])
+% colorbar('TickLabelInterpreter','latex','FontSize',tamano)
+% title(['$t_5$ = ' num2str(t5*dT) ' s'],'Interpreter','Latex')
+% 
+% subplot(1,6,6)
+% patch(matriz_x,matriz_y,Temp_6,'EdgeColor','none')
+% caxis manual
+% caxis([T_min T_max])
+% colorbar('TickLabelInterpreter','latex','FontSize',tamano)
+% title(['$t_6$ = ' num2str(t6*dT) ' s'],'Interpreter','Latex')
+% 
+% figure ()
+% colormap (flipud(hot))
+% patch(matriz_x,matriz_y,Temp_6,'EdgeColor','none')
+% caxis manual
+% caxis([T_min T_max])
+% colorbar('TickLabelInterpreter','latex','FontSize',tamano)
+% title(['$t_6$ = ' num2str(t6*dT) ' s'],'Interpreter','Latex')
 
  end

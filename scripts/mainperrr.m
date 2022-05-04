@@ -50,7 +50,7 @@ tic
             % traería
 
             % Condicion de contorno de conveccion Y=0
-            cc_inlet = @(x,t) 300;   ; 
+            cc_inlet = @(x,t) 300;   
         
         % - Con respecto a la conducción, se establece esta condición de
             % contorno únicamente en las paredes laterales X=0, X=L. Se
@@ -87,7 +87,7 @@ tic
 
        %% Discretización espacial
 
-       disc = 1;
+       %disc = 1;
        %Disc = 1: upwind
        %Disc = 2: gds
 
@@ -103,15 +103,15 @@ toc
     % desea que se realice el graficado. Estas puestos unos en concreto por
     % defecto, pero deben cambiarse en funcion de lo que desee observar.
         
-        matriz_x = zeros(3,grid.N);
-        matriz_y = zeros(3,grid.N);
-                
-        for i = 1:grid.N
-        for j = 1:3
-        matriz_x(j,i) = grid.nodes(grid.cells(i,j),1);
-        matriz_y(j,i) = grid.nodes(grid.cells(i,j),2);
-        end
-        end 
+%         matriz_x = zeros(3,grid.N);
+%         matriz_y = zeros(3,grid.N);
+%                 
+%         for i = 1:grid.N
+%         for j = 1:3
+%         matriz_x(j,i) = grid.nodes(grid.cells(i,j),1);
+%         matriz_y(j,i) = grid.nodes(grid.cells(i,j),2);
+%         end
+%         end 
         
         %grafica(Matriz_Temp,matriz_x,matriz_y,dt_sol)
 
