@@ -1,12 +1,12 @@
-clear all
-close all
-clc
+% clear all
+% close all
+% clc
+
 
 tic
-
 %%% Parámetros del problema a rellenar por el usuario %%%
     
-    celdas = 256; %Número de celdas de la malla
+    %celdas = 256; %Número de celdas de la malla
     
     % Archivos de datos
         filenames = ["../data/nodes_"+num2str(celdas)+".dat" ...
@@ -77,23 +77,24 @@ tic
         Tipo_CC = [1, 1];
 
        %% Datos integrador
-       datos_integracion.Courant = 50; %Valor del número de Courant
+       %datos_integracion.Courant = 50; %Valor del número de Courant
        datos_integracion.dt1 = 0.1; %Paso temporal (s)
        datos_integracion.t_max = 1; %Tiempo máximo de resolución (s)
-       datos_integracion.Tipo_integrador = 1; % Tipo de integrador
+       %datos_integracion.Tipo_integrador = 1; % Tipo de integrador
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
+        
+
        %% Discretización espacial
 
        disc = 1;
        %Disc = 1: upwind
        %Disc = 2: gds
 
-
 %%% Simulador
 
     [ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
-    datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC,disc);
+    datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC, disc);
 toc
 %%% Representación gráfica
 
@@ -112,7 +113,7 @@ toc
         end
         end 
         
-        grafica(Matriz_Temp,matriz_x,matriz_y,dt_sol)
+        %grafica(Matriz_Temp,matriz_x,matriz_y,dt_sol)
 
         
 

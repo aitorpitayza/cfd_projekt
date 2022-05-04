@@ -1,4 +1,4 @@
-function [A, b] = temp(t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
+function [A, b] = temp(t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right, disc)
 
 % Esta función representa la EDO ya discretizada con las matrices de los 
 % términos ya calculadas.
@@ -27,8 +27,11 @@ function [A, b] = temp(t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right)
 % ------------- Términos convectivos -------------
 
 % Matrices
-% [C, C_BC] = convec( grid, v, t);
+if (disc == 1)
+[C, C_BC] = convec( grid, v, t);
+elseif (disc == 2)
 [C, C_BC] = convec_gds( grid, v, t);
+end
 
 % Término independiente
 c_bc = cc_convec( cc_inlet, grid, v, t);

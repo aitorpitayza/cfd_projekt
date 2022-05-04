@@ -1,0 +1,29 @@
+
+%% Plotter
+
+
+%Comparación Euler
+time = [];
+datos_integracion.Courant = 0.1;
+for q = 1:2
+   datos_integracion.Tipo_integrador = q;
+for p = 1:6
+
+   n_cel = [4, 16, 64, 256, 1024, 4096];
+   celdas = n_cel(p)
+
+   
+   main
+   time(p) = toc
+end
+   figure(4)
+   
+   plot(n_cel, time)
+   hold on
+   legend('Euler implícito', 'Crank Nicolson')
+   title('Comparación de tiempo de cálculo según esquema temporal')
+end
+   
+    
+    
+    

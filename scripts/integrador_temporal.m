@@ -1,5 +1,5 @@
 function [ Matriz_Temp,dt] = integrador_temporal(grid, datos_integracion, ...
-    datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC)
+    datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC, disc)
 
 % Esta funcion permite obtener los valores de temperatura en cada instante
 % mediante una discretizacion y los almacena en la matriz de temperaturas Matriz_Temp.
@@ -79,7 +79,7 @@ for i=1:Num_contador
         % Instante inicial
     
         [A,b] = temp(tiempo, grid, campo_velocidad, datos, Tipo_CC, ...
-                                                cc_inlet, cc_left, cc_right);
+                                                cc_inlet, cc_left, cc_right, disc);
     
     else
         
@@ -92,7 +92,7 @@ for i=1:Num_contador
     end
           
     [A_1, b_1]  = temp(tiempo_siguiente, grid, campo_velocidad, datos, ...
-                                        Tipo_CC, cc_inlet, cc_left, cc_right);
+                                        Tipo_CC, cc_inlet, cc_left, cc_right, disc);
 
     % Se elige el propagador
 
