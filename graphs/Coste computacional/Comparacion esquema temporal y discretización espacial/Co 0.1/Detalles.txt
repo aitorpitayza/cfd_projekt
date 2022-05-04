@@ -1,3 +1,0 @@
-Co = 0.1, no se asegura convergencia de forma absoluta pero da un indicativo aproximado del tiempo de cálculo.
-Se comparan Euler implicito y Crank nicolson mediante la comparación de sus tiempos de computación a medida que la malla se refina, cada uno con upwind y GDS..
-Comentar las gráficas, las tendencias generales a medida que aumenta el número de elementos y la particular de Euler o CN
