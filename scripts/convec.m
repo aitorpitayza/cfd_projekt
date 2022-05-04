@@ -1,9 +1,9 @@
 function [ C , C_BC] = convec( grid, v, t)
 
-
 % Esta función entrega la matriz de convección del dominio, así como la 
 % parte convectiva relativa a las condiciones de contorno, utilizada
-%para estimar la derivada temporal de T mediante volúmenes finitos.
+%para estimar la derivada temporal de T mediante volúmenes finitos. 
+% Método upwind.
 
 
 %   Entradas

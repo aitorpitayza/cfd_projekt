@@ -1,22 +1,22 @@
 function [ Temp ] = euler_implicito( MatA_n1, VectB, dT, Tempi,N)
 
-% Esta función realiza el cálculo mediante el método de integración
-% de Euler implícito (implícito de primer orden). 
+% Esta funciÃ³n realiza el cÃ¡lculo mediante el mÃ©todo de integraciÃ³n
+% de Euler implÃ­cito (implï¿½cito de primer orden). 
 
 %   Entradas
 %   ........
 %
 %   - MatA_n1: Matriz del sistema en el siguiente instante temporal. 
-%   - VectB: Vector de términos independientes del sistema en el instante
+%   - VectB: Vector de tÃ©rminos independientes del sistema en el instante
 %            temporal actual.
 %   - dT: paso temporal
-%   - Tempi: Matriz de temperaturas en el instante de cálculo. 
+%   - Tempi: Matriz de temperaturas en el instante de cï¿½lculo. 
 %   - N: numero de celdas.
 
 %   Salidas
 %   ......
 %
-%   - Temp: Matriz de temperaturas solución. 
+%   - Temp: Matriz de temperaturas soluciï¿½n. 
 
 MatI=eye(N);
 M_sys= MatI-dT*MatA_n1;

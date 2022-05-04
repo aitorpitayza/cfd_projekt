@@ -3,7 +3,8 @@ function [A, b] = temp(t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right, 
 % Esta función representa la EDO ya discretizada con las matrices de los 
 % términos ya calculadas.
 %
-% --- Inputs ---
+%   Entradas
+%   ........
 %   
 %       T : Vector temperaturas en los centroides de las celdas.
 %       t : instante de tiempo (s)
@@ -19,10 +20,17 @@ function [A, b] = temp(t, grid, v, datos, Tipo_CC, cc_inlet, cc_left, cc_right, 
 %       cc_right : función de la posición "y" y del tiempo que determina la ccen
 %                 el lado derecho del dominio.
 %       
-% --- Outputs ---
+%   Salida 
+%   ......
 %
-%       A : 
+%       Si la matriz jacobiana del problema es dT/dt, esta cumple: 
 %
+%               dT/dt = A * T + b                                       (1)
+%
+%       A : matriz A de la ec. (1)
+%       b : vector de términos independientes, ec.(1)
+%
+% Para ello : 
 
 % ------------- Términos convectivos -------------
 

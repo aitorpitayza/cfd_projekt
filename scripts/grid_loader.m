@@ -1,4 +1,5 @@
 function [grid_data, bc] = grid_loader(filenames)
+    
     % load_grid : Creates a variable with all the grid data based on the 
     % inserted files.
     %  
