@@ -1,7 +1,4 @@
 function [ K, K_BC ] = conduc(grid, Tipo_CC)
-    % conduc( Vol, Areas, Rc, Rn, Normalesx,Normalesy,...
-    % N, Vecinos, kk )
-
 
 % Esta función entrega la matriz de conducción del dominio, así como la 
 % parte conductiva relativa a las condiciones de contorno.

@@ -1,3 +1,16 @@
+%%%%%%% PROYECTO SIMULADOR CFD - MASTER EN INGENIERIA AERONAUTICA %%%%%%%%%%%%%%
+%
+%   AUTORES : 
+%       Marcos Piedrabuena Muñoz,
+%       Luis Miguel Prados Palacios,
+%       Victor Herrero Burgueño
+%       Sara Alonso Lucas,
+%       Alejandro López Sánchez y 
+%       Aitor Pitarch Ayza.
+%
+%   PROFESOR : 
+%       Luis Miguel García-Cuevas González
+
 clear all
 close all
 clc
@@ -83,7 +96,7 @@ tic
        datos_integracion.Tipo_integrador = 1; % Tipo de integrador
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
-       %% Discretización espacial
+       %% Modelo de discretización
 
        disc = 1;
        %Disc = 1: upwind
@@ -94,6 +107,7 @@ tic
 
     [ Matriz_Temp, dt_sol] = integrador_temporal(grid, datos_integracion, ...
     datos, campo_velocidad, T_ci, cc_left,cc_right, cc_inlet, Tipo_CC,disc);
+    
 toc
 %%% Representación gráfica
 

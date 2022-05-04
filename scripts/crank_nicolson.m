@@ -1,8 +1,8 @@
 function [ Temp] = crank_nicolson( MatA, MatA_n1, VectB,...
       VectB_n1, dT, Tempi,N)
 
-% Esta función realiza el cálculo mediante el método de integración
-% de Crank Nicolson (implícito de segundo orden). 
+% Esta funciÃ³n realiza el cÃ¡lculo mediante el mÃ©todo de integraciÃ³n
+% de Crank Nicolson (implÃ­cito de segundo orden). 
 
 %   Entradas
 %   ........
@@ -10,17 +10,17 @@ function [ Temp] = crank_nicolson( MatA, MatA_n1, VectB,...
 %   - MatA: Matriz del sistema en el instante temporal actual. 
 %   - MatA_n1: Matriz del sistema en el siguiente instante temporal.
 %   - MatI: matriz identidad.
-%   - VectB: Vector de términos independientes del sistema en el instante
+%   - VectB: Vector de tÃ©rminos independientes del sistema en el instante
 %            temporal actual.
-%   - VectB_n1: Vector de términos independientes del sistema en el
+%   - VectB_n1: Vector de tÃ©rminos independientes del sistema en el
 %               siguiente instante temporal.   
 %   - dT: paso temporal
-%   - Tempi: Matriz de temperaturas en el instante de cálculo. 
+%   - Tempi: Matriz de temperaturas en el instante de cÃ¡lculo. 
 
 %   Salidas
 %   ......
 %
-%   - Temp: Matriz de temperaturas solución. 
+%   - Temp: Matriz de temperaturas soluciÃ³n. 
 
 MatI=eye(N);
 
