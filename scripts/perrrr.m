@@ -4,7 +4,7 @@
 
 %Comparación Euler/Crank
 time = [];
-datos_integracion.Courant = 0.1;
+datos_integracion.Courant = 5;
 
 
 for w = 1:2
@@ -23,9 +23,16 @@ for w = 1:2
            figure(4)
            
            plot(n_cel, time)
+           %set(gca,'XScale','log')
+           %xticks([4, 16, 64, 256, 1024, 4096])
+           %xticklabels({'4', '16', '64', '256', '1024', '4096'})
+
+           xlabel('Elementos de malla')
+           ylabel('Tiempo [s]')
            hold on
            legend('Euler implícito upwind', 'Crank Nicolson upwind', 'Euler implícito GDS', 'Crank Nicolson GDS')
            title('Tiempo de cálculo según esquema temporal y espacial')
+           
         end
 end
     
