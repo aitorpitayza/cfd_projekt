@@ -93,7 +93,7 @@ tic
        datos_integracion.Courant = 0.1; %Valor del número de Courant
        datos_integracion.dt1 = 0.01; %Paso temporal (s)
        datos_integracion.t_max = 0.1; %Tiempo máximo de resolución (s)
-       datos_integracion.Tipo_integrador = 3; % Tipo de integrador
+       datos_integracion.Tipo_integrador = 2; % Tipo de integrador
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
                                               % 3 = Runge Kutta 4
