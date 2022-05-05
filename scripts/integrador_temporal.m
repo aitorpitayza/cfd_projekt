@@ -78,6 +78,15 @@ for i=1:Num_contador
     % Se calcula la jacobiana del campo de temperaturas. Como es lineal, se 
     % separa en una matriz A y un vector b tal que: dT/dt = A * T + b;
     
+    if (Tipo_integrador == 3)
+        
+        Matriz_Temp(:,i+1) = runge_kutta_4( Tempi, ...
+                                    jacobiana_linealizada, tiempo, dt);
+                                
+        continue
+       
+    end
+    
     if (i==1)
 
         % Instante inicial
@@ -109,11 +118,6 @@ for i=1:Num_contador
 
         Matriz_Temp(:,i+1)= crank_nicolson( A, A_1, b, b_1, dt, Tempi,N);
             
-        
-    elseif (Tipo_integrador == 3)
-
-        Matriz_Temp(:,i+1) = runge_kutta_4( Tempi, ...
-                                    jacobiana_linealizada, tiempo, dt);
 
     end
     
