@@ -63,6 +63,7 @@ T_max = max(T_maxvector);
 T_min = min(T_minvector);
 
 figure ()
+sgtitle('Temperatura de la placa, evolución temporal')
 colormap (flipud(hot))
 subplot(1,6,1)
 patch(matriz_x,matriz_y,Temp_1,'EdgeColor','none')
