@@ -66,9 +66,6 @@ Matriz_Temp = T_ini';
 t_sol = 0;
 Num_contador=ceil(t_max/dt);
 
-jacobiana_linealizada = @(t) temp(t, grid, campo_velocidad, datos, Tipo_CC, ...
-cc_inlet, cc_left, cc_right, disc);
-
 for i=1:Num_contador
     
     tiempo=(i-1)*dt;
@@ -120,5 +117,5 @@ for i=1:Num_contador
             
 
     end
-    
+
 end

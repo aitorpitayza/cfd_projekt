@@ -63,7 +63,7 @@ tic
             % traería
 
             % Condicion de contorno de conveccion Y=0
-            cc_inlet = @(x,t) 300;   
+            cc_inlet = @(x,t) 300;   ; 
         
         % - Con respecto a la conducción, se establece esta condición de
             % contorno únicamente en las paredes laterales X=0, X=L. Se
@@ -90,13 +90,14 @@ tic
         Tipo_CC = [1, 1];
 
        %% Datos integrador
+
        datos_integracion.Courant = 0.1; %Valor del número de Courant
        datos_integracion.dt1 = 0.01; %Paso temporal (s)
        datos_integracion.t_max = 0.1; %Tiempo máximo de resolución (s)
        datos_integracion.Tipo_integrador = 2; % Tipo de integrador
+
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
-                                              % 3 = Runge Kutta 4
        %% Modelo de discretización
 
        disc = 2;
