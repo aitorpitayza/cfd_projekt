@@ -36,7 +36,7 @@ tic
         campo_velocidad = @(x,y,t) [0; (1-x)]; %[0;(0.005+(0.05-x)*2)*0.02];
         
         % Distribución de temperatura inicial
-        T_ci = @(x,y) 300; %(y)*4000;
+        T_ci = @(x,y) 500; 
 
     % Condiciones de contorno, dónde se toman las siguientes
     % suponsiciones a la hora de crearlas:
@@ -78,11 +78,12 @@ tic
 
        %% Datos integrador
        %datos_integracion.Courant = 50; %Valor del número de Courant
-       datos_integracion.dt1 = 0.1; %Paso temporal (s)
+       datos_integracion.dt1 = 0.5; %Paso temporal (s)
        datos_integracion.t_max = 1; %Tiempo máximo de resolución (s)
        %datos_integracion.Tipo_integrador = 1; % Tipo de integrador
                                               % 1 = Euler implicito
                                               % 2 = Crank Nicolson
+                                              % 3 = R-K 
         
 
        %% Discretización espacial
