@@ -10,4 +10,4 @@ The principal aim of this project is to explore the performance of different num
 
 ------------------------
 Esquema del código:
-![alt text](https://github.com/aitorpitayza/cfd_projekt/blob/main/EsquemaCodigo.tiff?raw=true)
+![alt text](https://github.com/aitorpitayza/cfd_projekt/blob/main/EsquemaCodigo.jpg?raw=true)
